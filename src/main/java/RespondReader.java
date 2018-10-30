@@ -3,7 +3,7 @@ import java.io.InputStream;
 
 public class RespondReader {
 
-    public void readRespond(int responseCode, String respondMessage, InputStream inputStream) throws IOException {
+    public String readRespond(int responseCode, String respondMessage, InputStream inputStream) throws IOException {
         if (responseCode == 200) {
             System.out.println("Server reached");
 
@@ -11,11 +11,9 @@ public class RespondReader {
             StreamConverter converter = new StreamConverter();
             String responseBody = converter.convertStreamToString(stream);
             stream.close();
-            System.out.println("Response from the server:");
-            System.out.println(responseBody);
+            return responseBody;
         } else {
-            String responseDescription = respondMessage;
-            System.out.println("Request failed, response code: " + responseCode + " (" + responseDescription + ")");
+            return "Request failed, response code: " + responseCode + " (" + respondMessage + ")";
         }
     }
 }
