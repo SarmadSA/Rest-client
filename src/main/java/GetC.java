@@ -4,6 +4,11 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 public class GetC {
+    private String respond = "No respond";
+
+    public String getRespond() {
+        return respond;
+    }
 
     public void sendGet(String url){
         try{
@@ -14,7 +19,7 @@ public class GetC {
 
             int responseCode = con.getResponseCode();
             RespondReader respondReader = new RespondReader();
-            respondReader.readRespond(responseCode, con.getResponseMessage(), con.getInputStream());
+            respond = respondReader.readRespond(responseCode, con.getResponseMessage(), con.getInputStream());
 
         }  catch (ProtocolException e) {
             System.out.println("Protocol not supported by the server");
