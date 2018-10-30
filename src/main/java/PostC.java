@@ -7,6 +7,11 @@ import java.net.ProtocolException;
 import java.net.URL;
 
 public class PostC {
+    private String respond = "No respond";
+
+    public String getRespond() {
+        return respond;
+    }
 
     public void postSend(String url, JSONObject jsonData){
         if(jsonData != null){
@@ -25,7 +30,7 @@ public class PostC {
 
                 int responseCode = con.getResponseCode();
                 RespondReader respondReader = new RespondReader();
-                respondReader.readRespond(responseCode, con.getResponseMessage(), con.getInputStream());
+                respond = respondReader.readRespond(responseCode, con.getResponseMessage(), con.getInputStream());
 
             }catch (ProtocolException e) {
                 System.out.println("Protocol nto supported by the server");
